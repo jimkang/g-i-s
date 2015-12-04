@@ -12,7 +12,7 @@ Usage
 -----
 
     var gis = require('g-i-s');
-    gis('cats', checkResults);
+    gis('cats', logResults);
 
     function logResults(error, results) {
       if (error) {
