@@ -1,7 +1,7 @@
 g-i-s
 =====
 
-Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes. This one works as of 12/2/2015.
+Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 12/2/2015.
 
 Installation
 ------------
@@ -19,17 +19,17 @@ Usage
         console.log(error);
       }
       else {
-        console.log(results);
+        console.log(JSON.stringify(results, null, '  '));
       }
     }
 
 Output:
 
     [
-      'http://animalia-life.com/cat.html&sa=U&ved=0ahUKEwiojKvqnsHJAhWMOz4KHZx3B2QQwW4IFjAA&usg=AFQjCNEL_cjEBxfZJiRwun330eTN_WMl_g',
-      'https://www.youtube.com/watch%3Fv%3DtntOCGkgt98&sa=U&ved=0ahUKEwiojKvqnsHJAhWMOz4KHZx3B2QQwW4IGDAB&usg=AFQjCNFG-vK79EhZStQ6lHol6q2QnOYp0A',
-      'https://twitter.com/cats&sa=U&ved=0ahUKEwiojKvqnsHJAhWMOz4KHZx3B2QQwW4IGjAC&usg=AFQjCNHnLXmWvZmIInflKlQZP8-BKd6fPQ',
-      'https://en.wikipedia.org/wiki/Cat&sa=U&ved=0ahUKEwiojKvqnsHJAhWMOz4KHZx3B2QQwW4IHDAD&usg=AFQjCNG-AgFLAwkkhtFVBBd0kBGutEZNrw',
+      "http://animalia-life.com/data_images/cat/cat2.jpg",
+      "https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg",
+      "https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a.jpeg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/1e/Large_Siamese_cat_tosses_a_mouse.jpg",
       ...
     ]
 

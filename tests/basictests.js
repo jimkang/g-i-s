@@ -8,6 +8,7 @@ test('Basic test', function basicTest(t) {
     t.ok(!error, 'No error.');
     t.ok(results.length > 0, 'There is at least one result.');
     results.forEach(checkResult);
+    // console.log(JSON.stringify(results, null, '  '));
     t.end();
   }
 
@@ -17,6 +18,10 @@ test('Basic test', function basicTest(t) {
       result.indexOf('http://') !== -1 ||
       result.indexOf('https://') !== -1,
       'Result looks like a URL.'
+    );
+    t.ok(
+      result.indexOf('imgrefurl') === -1,
+      'Result does not have imgrefurl in it.'
     );
   }
 });
