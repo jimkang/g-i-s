@@ -1,7 +1,7 @@
 g-i-s
 =====
 
-Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 12/2/2015.
+Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 4/10/2016.
 
 Installation
 ------------
