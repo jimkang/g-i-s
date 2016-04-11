@@ -1,9 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-var gisPrefixRegex = /.*imgurl=/;
-var gisSuffixRegex = /&imgrefurl.*/;
-
 var baseURL = 'http://images.google.com/search?tbm=isch&q=';
 
 function gis(searchTerm, done) {
@@ -22,21 +19,19 @@ function gis(searchTerm, done) {
     }
     else {
       var $ = cheerio.load(body);
-      var imageLinks = $('#rg_s a');
+      var metaLinks = $('.rg_meta');
       var gisURLs = [];
-      imageLinks.each(collectHref);
-      done(error, gisURLs.map(getImageURLFromGISURL));
+      metaLinks.each(collectHref);
+      done(error, gisURLs);
     }
 
     function collectHref(i, element) {
-      gisURLs.push(element.attribs.href);
+      if (element.children.length > 0 && 'data' in element.children[0]) {
+        var metadata = JSON.parse(element.children[0].data);
+        gisURLs.push(metadata.ou);
+      }
     }
   }
-}
-
-function getImageURLFromGISURL(gisURL) {
-  var imageURL = gisURL.replace(gisPrefixRegex, '');
-  return imageURL.replace(gisSuffixRegex, '');
 }
 
 module.exports = gis;
