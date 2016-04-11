@@ -28,7 +28,10 @@ function gis(searchTerm, done) {
     function collectHref(i, element) {
       if (element.children.length > 0 && 'data' in element.children[0]) {
         var metadata = JSON.parse(element.children[0].data);
-        gisURLs.push(metadata.ou);
+        if (metadata.ou) {
+          gisURLs.push(metadata.ou);
+        }
+        // Elements without metadata.ou are subcategory headings in the results page.
       }
     }
   }
