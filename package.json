@@ -1,6 +1,6 @@
 {
   "name": "g-i-s",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Google Image Search",
   "main": "index.js",
   "scripts": {
