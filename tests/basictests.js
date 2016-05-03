@@ -3,7 +3,11 @@ var gis = require('../index');
 
 var searchTopics = [
   'cats',
-  'oh no'
+  'oh no',
+  {
+    searchTerm: 'sleep',
+    queryStringAddition: '&tbs=ic:trans'
+  }
 ];
 
 searchTopics.forEach(runTest);

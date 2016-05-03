@@ -1,7 +1,7 @@
 g-i-s
 =====
 
-Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 4/10/2016.
+Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 5/2/2016.
 
 Installation
 ------------
@@ -32,6 +32,14 @@ Output:
       "https://upload.wikimedia.org/wikipedia/commons/1/1e/Large_Siamese_cat_tosses_a_mouse.jpg",
       ...
     ]
+
+If you want to pass additional stuff to tack onto the Google image search URL, pass an object containing `searchTerm` and `queryStringAddition`. e.g.
+
+    var opts = {
+      searchTerm: 'cat',
+      queryStringAddition: '&tbs=ic:trans'
+    };
+    gis(opts, logResults);
 
 Tests
 -----

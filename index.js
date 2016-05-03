@@ -3,15 +3,30 @@ var cheerio = require('cheerio');
 
 var baseURL = 'http://images.google.com/search?tbm=isch&q=';
 
-function gis(searchTerm, done) {
-  var opts = {
-    url: baseURL + searchTerm,
+function gis(opts, done) {
+  var searchTerm;
+  var queryStringAddition;
+
+  if (typeof opts === 'string') {
+    searchTerm = opts;
+  }
+  else {
+    searchTerm = opts.searchTerm;
+    queryStringAddition = opts.queryStringAddition;
+  }
+
+  var url = baseURL + searchTerm;
+  if (queryStringAddition) {
+    url += queryStringAddition;
+  }
+  var reqOpts = {
+    url: url,
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
     }
   };
 
-  request(opts, parseGISResponse);
+  request(reqOpts, parseGISResponse);
 
   function parseGISResponse(error, response, body) {
     if (error) {
