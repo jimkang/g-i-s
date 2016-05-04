@@ -44,7 +44,12 @@ function gis(opts, done) {
       if (element.children.length > 0 && 'data' in element.children[0]) {
         var metadata = JSON.parse(element.children[0].data);
         if (metadata.ou) {
-          gisURLs.push(metadata.ou);
+          var result = {
+            url: metadata.ou,
+            width: metadata.ow,
+            height: metadata.oh
+          };
+          gisURLs.push(result);
         }
         // Elements without metadata.ou are subcategory headings in the results page.
       }

@@ -25,16 +25,19 @@ function runTest(topic) {
     }
 
     function checkResult(result) {
-      t.equal(typeof result, 'string', 'Result is a string.');
+      t.equal(typeof result, 'object', 'Result is an object.');
+      t.equal(typeof result.url, 'string', 'Result url is a string.');
       t.ok(
-        result.indexOf('http://') !== -1 ||
-        result.indexOf('https://') !== -1,
-        'Result looks like a URL.'
+        result.url.indexOf('http://') !== -1 ||
+        result.url.indexOf('https://') !== -1,
+        'Result url looks like a URL.'
       );
       t.ok(
-        result.indexOf('imgrefurl') === -1,
-        'Result does not have imgrefurl in it.'
+        result.url.indexOf('imgrefurl') === -1,
+        'Result url does not have imgrefurl in it.'
       );
+      t.ok(!isNaN(result.width), 'Result has a width.');
+      t.ok(!isNaN(result.height), 'Result has a height.');
     }
   });
 }

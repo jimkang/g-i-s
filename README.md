@@ -26,10 +26,26 @@ Usage
 Output:
 
     [
-      "http://animalia-life.com/data_images/cat/cat2.jpg",
-      "https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg",
-      "https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a.jpeg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1e/Large_Siamese_cat_tosses_a_mouse.jpg",
+      {
+        "url": "https://i.ytimg.com/vi/mW3S0u8bj58/maxresdefault.jpg",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "url": "https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "url": "https://www.petfinder.com/wp-content/uploads/2013/09/cat-black-superstitious-fcs-cat-myths-162286659.jpg",
+        "width": 632,
+        "height": 353
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Large_Siamese_cat_tosses_a_mouse.jpg",
+        "width": 3415,
+        "height": 2268
+      },
       ...
     ]
 
@@ -51,7 +67,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Jim Kang
+Copyright (c) 2016 Jim Kang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
