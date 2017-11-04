@@ -57,6 +57,20 @@ If you want to pass additional stuff to tack onto the Google image search URL, p
     };
     gis(opts, logResults);
 
+You can also filter out results from specfied domains:
+
+    var opts = {
+      searchTerm: 'cat',
+      queryStringAddition: '&tbs=ic:trans',
+      filterOutDomains: [
+        'pinterest.com',
+        'deviantart.com'
+      ]
+    };
+    gis(opts, logResults);
+
+Specifying `filterOutDomains` will both tell Google to not to include results that come from web pages on those domains and also filter image results that are hosted on those domains. (Sometimes an image is on an html page on a domain not included in your filters and has an img tag that loads from a domain that is included in your filters.)
+
 Tests
 -----
 
@@ -67,7 +81,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Jim Kang
+Copyright (c) 2017 Jim Kang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
