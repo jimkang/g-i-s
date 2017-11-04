@@ -33,7 +33,7 @@ function gis(opts, done) {
     }
   };
 
-  console.log(reqOpts.url);
+  // console.log(reqOpts.url);
   request(reqOpts, parseGISResponse);
 
   function parseGISResponse(error, response, body) {
