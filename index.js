@@ -1,7 +1,8 @@
 var request = require('request');
 var cheerio = require('cheerio');
+var queryString = require('querystring');
 
-var baseURL = 'http://images.google.com/search?tbm=isch&q=';
+var baseURL = 'http://images.google.com/search?';
 
 function gis(opts, done) {
   var searchTerm;
@@ -17,7 +18,10 @@ function gis(opts, done) {
     filterOutDomains = opts.filterOutDomains;
   }
 
-  var url = baseURL + searchTerm;
+  var url = baseURL + queryString.stringify({
+      tbm: 'isch',
+      q: searchTerm
+  });
 
   if (filterOutDomains) {
     url += encodeURIComponent(' ' + filterOutDomains.map(addSiteExcludePrefix).join(' '));

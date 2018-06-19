@@ -4,6 +4,7 @@ var gis = require('../index');
 var searchTopics = [
   'cats',
   'oh no',
+  'ківі',
   {
     searchTerm: 'sleep',
     queryStringAddition: '&tbs=ic:trans'
