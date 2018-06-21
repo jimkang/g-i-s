@@ -1,7 +1,9 @@
 g-i-s
 =====
 
-Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 5/2/2016.
+[![Build Status](https://travis-ci.org/jimkang/g-i-s.svg?branch=master)](https://travis-ci.org/jimkang/g-i-s)
+
+Another Google Image Search Node module. The nature of these things is that they eventually break as GIS changes, but this one works as of 2018-06-20.
 
 Installation
 ------------
