@@ -8,7 +8,7 @@ var searchTopics = [
   {
     searchTerm: 'sleep',
     queryStringAddition: '&tbs=ic:trans'
-  },
+ },
   {
     searchTerm: 'pony',
     queryStringAddition: '&tbs=ic:trans',
@@ -47,8 +47,14 @@ function runTest(topic) {
       );
       t.ok(!isNaN(result.width), 'Result has a width.');
       t.ok(!isNaN(result.height), 'Result has a height.');
-      t.equal(result.url.indexOf('deviantart.net'), -1, 'Result is not from a filtered domain.');
-      t.equal(result.url.indexOf('deviantart.com'), -1, 'Result is not from a filtered domain.');
+
+      if (topic.filterOutDomains) {
+        if (result.url.indexOf('deviantart.net') !== -1 || result.url.indexOf('deviantart.com') !== -1) {
+          debugger;
+        }
+        t.equal(result.url.indexOf('deviantart.net'), -1, 'Result is not from a filtered domain.');
+        t.equal(result.url.indexOf('deviantart.com'), -1, 'Result is not from a filtered domain.');
+      }
       // if (result.url.indexOf('deviantart.net') !== -1) {
       //   console.log(result.url);
       // }
