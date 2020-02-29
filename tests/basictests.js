@@ -8,14 +8,11 @@ var searchTopics = [
   {
     searchTerm: 'sleep',
     queryStringAddition: '&tbs=ic:trans'
- },
+  },
   {
     searchTerm: 'pony',
     queryStringAddition: '&tbs=ic:trans',
-    filterOutDomains: [
-      'deviantart.net',
-      'deviantart.com'
-    ]
+    filterOutDomains: ['deviantart.net', 'deviantart.com']
   }
 ];
 
@@ -38,7 +35,7 @@ function runTest(topic) {
       t.equal(typeof result.url, 'string', 'Result url is a string.');
       t.ok(
         result.url.indexOf('http://') !== -1 ||
-        result.url.indexOf('https://') !== -1,
+          result.url.indexOf('https://') !== -1,
         'Result url looks like a URL.'
       );
       t.ok(
@@ -49,11 +46,16 @@ function runTest(topic) {
       t.ok(!isNaN(result.height), 'Result has a height.');
 
       if (topic.filterOutDomains) {
-        if (result.url.indexOf('deviantart.net') !== -1 || result.url.indexOf('deviantart.com') !== -1) {
-          debugger;
-        }
-        t.equal(result.url.indexOf('deviantart.net'), -1, 'Result is not from a filtered domain.');
-        t.equal(result.url.indexOf('deviantart.com'), -1, 'Result is not from a filtered domain.');
+        t.equal(
+          result.url.indexOf('deviantart.net'),
+          -1,
+          'Result is not from a filtered domain.'
+        );
+        t.equal(
+          result.url.indexOf('deviantart.com'),
+          -1,
+          'Result is not from a filtered domain.'
+        );
       }
       // if (result.url.indexOf('deviantart.net') !== -1) {
       //   console.log(result.url);

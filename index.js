@@ -1,30 +1,36 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var queryString = require('querystring');
+var flatten = require('lodash.flatten');
 
 var baseURL = 'http://images.google.com/search?';
+
+var imageFileExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'];
 
 function gis(opts, done) {
   var searchTerm;
   var queryStringAddition;
-  var filterOutDomains;
+  var filterOutDomains = ['gstatic.com'];
 
   if (typeof opts === 'string') {
     searchTerm = opts;
-  }
-  else {
+  } else {
     searchTerm = opts.searchTerm;
     queryStringAddition = opts.queryStringAddition;
-    filterOutDomains = opts.filterOutDomains;
+    filterOutDomains = filterOutDomains.concat(opts.filterOutDomains);
   }
 
-  var url = baseURL + queryString.stringify({
+  var url =
+    baseURL +
+    queryString.stringify({
       tbm: 'isch',
       q: searchTerm
-  });
+    });
 
   if (filterOutDomains) {
-    url += encodeURIComponent(' ' + filterOutDomains.map(addSiteExcludePrefix).join(' '));
+    url += encodeURIComponent(
+      ' ' + filterOutDomains.map(addSiteExcludePrefix).join(' ')
+    );
   }
 
   if (queryStringAddition) {
@@ -33,7 +39,8 @@ function gis(opts, done) {
   var reqOpts = {
     url: url,
     headers: {
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+      'User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
     }
   };
 
@@ -43,49 +50,66 @@ function gis(opts, done) {
   function parseGISResponse(error, response, body) {
     if (error) {
       done(error);
+      return;
     }
-    else {
-      var $ = cheerio.load(body);
-      var metaLinks = $('.rg_meta');
-      var gisURLs = [];
-      metaLinks.each(collectHref);
-      done(error, gisURLs);
-    }
-
-    function collectHref(i, element) {
-      if (element.children.length > 0 && 'data' in element.children[0]) {
-        var metadata = JSON.parse(element.children[0].data);
-        if (metadata.ou) {
-          var result = {
-            url: metadata.ou,
-            width: metadata.ow,
-            height: metadata.oh
-          };
-          if (domainIsOK(result.url)) {
-            gisURLs.push(result);
-          }
+    var $ = cheerio.load(body);
+    var scripts = $('script');
+    var scriptContents = [];
+    for (var i = 0; i < scripts.length; ++i) {
+      if (scripts[i].children.length > 0) {
+        const content = scripts[i].children[0].data;
+        if (containsAnyImageFileExtension(content)) {
+          scriptContents.push(content);
         }
-        // Elements without metadata.ou are subcategory headings in the results page.
       }
     }
-  }
 
-  function domainIsOK(url) {
-    if (!filterOutDomains) {
-      return true;
-    }
-    else {
-      return filterOutDomains.every(skipDomainIsNotInURL);
+    done(error, flatten(scriptContents.map(collectImageRefs)));
+
+    function collectImageRefs(content) {
+      var refs = [];
+      var re = /\["(http.+?)",(\d+),(\d+)\]/g;
+      var result;
+      while ((result = re.exec(content)) !== null) {
+        if (result.length > 3) {
+          let ref = {
+            url: result[1],
+            width: +result[2],
+            height: +result[3]
+          };
+          if (domainIsOK(ref.url)) {
+            refs.push(ref);
+          }
+        }
+      }
+      return refs;
     }
 
-    function skipDomainIsNotInURL(skipDomain) {
-      return url.indexOf(skipDomain) === -1;
+    function domainIsOK(url) {
+      if (!filterOutDomains) {
+        return true;
+      } else {
+        return filterOutDomains.every(skipDomainIsNotInURL);
+      }
+
+      function skipDomainIsNotInURL(skipDomain) {
+        return url.indexOf(skipDomain) === -1;
+      }
     }
   }
 }
 
 function addSiteExcludePrefix(s) {
   return '-site:' + s;
+}
+
+function containsAnyImageFileExtension(s) {
+  var lowercase = s.toLowerCase();
+  return imageFileExtensions.some(containsImageFileExtension);
+
+  function containsImageFileExtension(ext) {
+    return lowercase.includes(ext);
+  }
 }
 
 module.exports = gis;
