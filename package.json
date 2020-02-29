@@ -21,8 +21,8 @@
     "tape": "^4.2.2"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc.3",
     "lodash.flatten": "^4.4.0",
-    "request": "^2.87.0"
+    "request": "^2.88.2"
   }
 }
