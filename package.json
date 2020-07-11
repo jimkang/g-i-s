@@ -19,7 +19,7 @@
   "homepage": "https://github.com/jimkang/g-i-s",
   "devDependencies": {
     "eslint": "^7.4.0",
-    "tape": "^4.2.2"
+    "tape": "^5.0.1"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
