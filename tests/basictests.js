@@ -26,7 +26,7 @@ function runTest(topic) {
       t.ok(!error, 'No error.');
       t.ok(results.length > 0, 'There is at least one result.');
       results.forEach(checkResult);
-      // console.log(JSON.stringify(results, null, '  '));
+      //console.log(JSON.stringify(results, null, '  '));
       t.end();
     }
 

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jimkang/g-i-s",
   "devDependencies": {
+    "eslint": "^7.4.0",
     "tape": "^4.2.2"
   },
   "dependencies": {

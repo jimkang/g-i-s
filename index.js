@@ -74,8 +74,8 @@ function gis(opts, done) {
         if (result.length > 3) {
           let ref = {
             url: result[1],
-            width: +result[2],
-            height: +result[3]
+            width: +result[3],
+            height: +result[2]
           };
           if (domainIsOK(ref.url)) {
             refs.push(ref);
