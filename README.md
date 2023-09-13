@@ -73,6 +73,8 @@ You can also filter out results from specfied domains:
 
 Specifying `filterOutDomains` will both tell Google to not to include results that come from web pages on those domains and also filter image results that are hosted on those domains. (Sometimes an image is on an html page on a domain not included in your filters and has an img tag that loads from a domain that is included in your filters.)
 
+You can pass `userAgent` in the opts to set the User-Agent header for the requests you make with this module.
+
 Tests
 -----
 

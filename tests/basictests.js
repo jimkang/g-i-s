@@ -24,7 +24,7 @@ function runTest(topic) {
 
     function checkResults(error, results) {
       t.ok(!error, 'No error.');
-      t.ok(results.length > 0, 'There is at least one result.');
+      t.ok(results.length > 0, 'There is at least one result for topic: ' + topic.searchTerm);
       results.forEach(checkResult);
       //console.log(JSON.stringify(results, null, '  '));
       t.end();

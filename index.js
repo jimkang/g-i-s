@@ -11,6 +11,7 @@ function gis(opts, done) {
   var searchTerm;
   var queryStringAddition;
   var filterOutDomains = ['gstatic.com'];
+  var userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0';
 
   if (typeof opts === 'string') {
     searchTerm = opts;
@@ -18,6 +19,7 @@ function gis(opts, done) {
     searchTerm = opts.searchTerm;
     queryStringAddition = opts.queryStringAddition;
     filterOutDomains = filterOutDomains.concat(opts.filterOutDomains);
+    userAgent = opts.userAgent;
   }
 
   var url =
@@ -37,10 +39,9 @@ function gis(opts, done) {
     url += queryStringAddition;
   }
   var reqOpts = {
-    url: url,
+    url,
     headers: {
-      'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+      'User-Agent': userAgent
     }
   };
 
