@@ -22,7 +22,7 @@
     "tape": "^5.0.1"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.12",
     "lodash.flatten": "^4.4.0",
     "request": "^2.88.2"
   }
