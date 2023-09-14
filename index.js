@@ -2,6 +2,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var queryString = require('querystring');
 var flatten = require('lodash.flatten');
+// var fs = require('fs');
 
 var baseURL = 'http://images.google.com/search?';
 
@@ -18,8 +19,12 @@ function gis(opts, done) {
   } else {
     searchTerm = opts.searchTerm;
     queryStringAddition = opts.queryStringAddition;
-    filterOutDomains = filterOutDomains.concat(opts.filterOutDomains);
-    userAgent = opts.userAgent;
+    if (opts.filterOutDomains) {
+      filterOutDomains = filterOutDomains.concat(opts.filterOutDomains);
+    }
+    if (opts.userAgent) {
+      userAgent = opts.userAgent;
+    }
   }
 
   var url =
@@ -83,6 +88,9 @@ function gis(opts, done) {
           }
         }
       }
+      // if (refs.length < 1) {
+      //   fs.writeFileSync('content.txt', content, { encoding: 'utf8' });
+      // }
       return refs;
     }
 
