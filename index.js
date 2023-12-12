@@ -12,7 +12,7 @@ function gis(opts, done) {
   var searchTerm;
   var queryStringAddition;
   var filterOutDomains = ['gstatic.com'];
-  var userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0';
+  var userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:120.0) Gecko/20100101 Firefox/120.0';
 
   if (typeof opts === 'string') {
     searchTerm = opts;
