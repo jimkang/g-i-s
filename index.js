@@ -79,7 +79,7 @@ function gis(opts, done) {
       while ((result = re.exec(content)) !== null) {
         if (result.length > 3) {
           let ref = {
-            url: result[1],
+            url: unicodeToString(result[1]),
             width: +result[3],
             height: +result[2]
           };
@@ -106,6 +106,10 @@ function gis(opts, done) {
       }
     }
   }
+}
+
+function unicodeToString(content) {
+  return content.replace(/\\u[\dA-F]{4}/gi, (match) => String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16)))
 }
 
 function addSiteExcludePrefix(s) {
